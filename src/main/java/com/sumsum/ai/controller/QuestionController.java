@@ -16,11 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1")
 public class QuestionController {
 
-    private static QuestionService service;
+    private final QuestionService service;
 
     @PostMapping("/question")
     public ResponseEntity<Long> questionPost(@RequestBody QuestionRequestDto dto){
         return ResponseEntity.status(HttpStatus.OK).body(service.postQuestion(dto));
     }
-
 }

@@ -15,8 +15,8 @@ public class QuestionRequestDto {
 
     public Question toQEntity(){
         return Question.builder()
-                .author(this.getAuthor())
-                .question(this.getQuestion())
+                .author(author)
+                .question(question)
                 .build();
     }
 }

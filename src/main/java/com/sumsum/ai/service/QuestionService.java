@@ -11,12 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class QuestionService {
 
-    private static QuestionRepository questionRepository;
+    private final QuestionRepository questionRepository;
 
     @Transactional
     public Long postQuestion(QuestionRequestDto dto){
-        Question que = dto.toQEntity();
-        return questionRepository.save(que).getId();
+        return questionRepository.save(dto.toQEntity()).getId();
     }
 
 
