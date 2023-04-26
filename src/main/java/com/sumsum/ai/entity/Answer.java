@@ -1,24 +1,25 @@
 package com.sumsum.ai.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
-import org.springframework.lang.NonNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
-@Entity
-@Table
+@Data
 @RequiredArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table
 @Builder
-@Data
-public class Question {
+public class Answer {
 
-    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String question;
+    private String content;
 
     @Column(nullable = false)
-    private String author;
+    private String question;
 }

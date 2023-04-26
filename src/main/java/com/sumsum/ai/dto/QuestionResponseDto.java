@@ -13,6 +13,9 @@ public class QuestionResponseDto {
 
     private String question;
 
-
+    public QuestionResponseDto(Question question1){
+        this.id = question1.getId();
+        this.question = question1.getQuestion();
+    }
 
 }
