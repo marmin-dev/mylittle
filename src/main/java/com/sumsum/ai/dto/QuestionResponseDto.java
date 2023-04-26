@@ -13,9 +13,12 @@ public class QuestionResponseDto {
 
     private String question;
 
+    private String answer;
+
     public QuestionResponseDto(Question question1){
         this.id = question1.getId();
         this.question = question1.getQuestion();
+        this.answer = question1.getAnswer();
     }
 
 }

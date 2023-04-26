@@ -21,4 +21,7 @@ public class Question {
 
     @Column(nullable = false)
     private String author;
+
+    @Column(nullable = false)
+    private String answer;
 }
