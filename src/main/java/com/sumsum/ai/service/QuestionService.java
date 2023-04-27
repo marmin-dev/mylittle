@@ -1,6 +1,7 @@
 package com.sumsum.ai.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sumsum.ai.dto.QuestionRequestDto;
 import com.sumsum.ai.dto.QuestionResponseDto;
@@ -40,6 +41,7 @@ public class QuestionService {
 
 
     public String createAnswer(String question) throws JsonProcessingException {
+        // set header and body and request to open ai api
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders httpHeaders = new HttpHeaders();
         // set header properties
@@ -59,26 +61,37 @@ public class QuestionService {
         messages.add(message);
 
         requestBodyMap.put("messages", messages);
-
+        requestBodyMap.put("temperature",1.5f);
+        // parsing to String
         String requestBody = objectMapper.writeValueAsString(requestBodyMap);
-
+        // set Http Entity
         HttpEntity<String> http = new HttpEntity<>(requestBody,httpHeaders);
         ResponseEntity entity = restTemplate.postForEntity(endpoint,http,String.class);
-
+        // get response
         String response = entity.getBody().toString();
-        System.out.println(response);
+        //System.out.println(response);
         return response;
     }
+
+    public String getContent(String data) throws JsonProcessingException {
+        // get content data from openai Response
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode rootNode = objectMapper.readTree(data);
+        String content = rootNode.get("choices").get(0).get("message").get("content").asText();
+        return content;
+    }
+
 
     @Transactional
     public QuestionResponseDto postQuestion(QuestionRequestDto dto) throws JsonProcessingException {
         // post question and get answer
         Question question = dto.toQEntity();
-        String answer = createAnswer(dto.getQuestion());
-        //question.setAnswer(answer);
+        String data = createAnswer(dto.getQuestion());
+        String answer = getContent(data);
+        question.setAnswer(answer);
         QuestionResponseDto responseDto = new QuestionResponseDto(question);
         System.out.println(answer);
-        questionRepository.save(question);
+        responseDto.setId(questionRepository.save(question).getId());
         return responseDto;
     }
 

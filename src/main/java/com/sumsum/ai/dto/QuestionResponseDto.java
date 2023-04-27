@@ -13,13 +13,13 @@ public class QuestionResponseDto {
 
     private String question;
 
-    //private String answer;
+    private String answer;
 
     public QuestionResponseDto(Question question1){
         // constructor by using entity
         this.id = question1.getId();
         this.question = question1.getQuestion();
-        //this.answer = question1.getAnswer();
+        this.answer = question1.getAnswer();
     }
 
 }
