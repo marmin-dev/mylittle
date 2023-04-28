@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sumsum.ai.dto.QuestionRequestDto;
+import com.sumsum.ai.dto.QuestionResponseCDto;
 import com.sumsum.ai.dto.QuestionResponseDto;
 
 import com.sumsum.ai.entity.Question;
@@ -90,7 +91,31 @@ public class QuestionService {
         String answer = getContent(data);
         question.setAnswer(answer);
         QuestionResponseDto responseDto = new QuestionResponseDto(question);
-        System.out.println(answer);
+        //System.out.println(answer);
+        responseDto.setId(questionRepository.save(question).getId());
+        return responseDto;
+    }
+
+    @Transactional
+    public QuestionResponseCDto postCharacterQuestion(int charNum,QuestionRequestDto dto) throws JsonProcessingException {
+        // post question and get answer
+        Question question = dto.toQEntity();
+        String data = createAnswer(dto.getQuestion());
+        String answer = getContent(data);
+        question.setAnswer(answer);
+        System.out.println(charNum);
+        // setting character code
+        if (charNum == 1) {
+            question.setCharMo("Anne");
+        }else if(charNum == 2){
+            question.setCharMo("Mary");
+        }else if (charNum == 3) {
+            question.setCharMo("수희");
+        }else{
+            question.setCharMo("예지");
+        }
+        QuestionResponseCDto responseDto = new QuestionResponseCDto(question);
+        System.out.println(question.toString());
         responseDto.setId(questionRepository.save(question).getId());
         return responseDto;
     }

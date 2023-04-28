@@ -9,6 +9,7 @@ import org.springframework.lang.NonNull;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString
 @Data
 public class Question {
 
@@ -24,4 +25,7 @@ public class Question {
 
     @Column(nullable = false)
     private String answer;
+
+    @Column(nullable = false)
+    private String charMo;
 }

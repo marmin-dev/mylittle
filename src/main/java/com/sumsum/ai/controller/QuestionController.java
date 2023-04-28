@@ -3,6 +3,7 @@ package com.sumsum.ai.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.sumsum.ai.dto.QuestionRequestDto;
+import com.sumsum.ai.dto.QuestionResponseCDto;
 import com.sumsum.ai.dto.QuestionResponseDto;
 import com.sumsum.ai.service.QuestionService;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,13 @@ public class QuestionController {
     public ResponseEntity<QuestionResponseDto> questionPost(@RequestBody QuestionRequestDto dto) throws JsonProcessingException {
         // create question and get answer
         return ResponseEntity.status(HttpStatus.OK).body(service.postQuestion(dto));
+    }
+
+    @PostMapping("/question/post/{charNum}")
+    public ResponseEntity<QuestionResponseCDto> questionPostCharacter(@PathVariable int charNum ,
+                                                                          @RequestBody QuestionRequestDto dto) throws JsonProcessingException {
+        // create question, set character and get answer
+        return ResponseEntity.status(HttpStatus.OK).body(service.postCharacterQuestion(charNum,dto));
     }
 
     @GetMapping("/question/{author}")
