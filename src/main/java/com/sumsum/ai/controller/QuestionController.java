@@ -39,4 +39,16 @@ public class QuestionController {
         return ResponseEntity.status(HttpStatus.OK).body(service.getQuestion(author));
     }
 
+    @GetMapping("/question/{author}/{charMo}")
+    public ResponseEntity<List<QuestionResponseCDto>> queByAuthorChar(@PathVariable String author, @PathVariable String charMo){
+        // get question and answer list by char and author
+        return ResponseEntity.status(HttpStatus.OK).body(service.getQByCAuthor(author,charMo));
+    }
+
+    @DeleteMapping("/question/{id}")
+    public ResponseEntity<Long> deleteQue(@PathVariable Long id){
+        // delete question by id
+        return ResponseEntity.status(HttpStatus.OK).body(service.deleteQue(id));
+    }
+
 }

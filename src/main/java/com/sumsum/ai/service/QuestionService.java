@@ -128,6 +128,20 @@ public class QuestionService {
         return qList;
     }
 
+    @Transactional
+    public List<QuestionResponseCDto> getQByCAuthor(String author, String charMo){
+        // find all by author, Character
+        List<QuestionResponseCDto> qList = questionRepository.findByAuthorAndCharacter(author,charMo)
+                .stream().map(question -> new QuestionResponseCDto(question)).collect(Collectors.toList());
+        return qList;
+    }
+
+    @Transactional
+    public Long deleteQue(Long id){
+        // delete question
+        questionRepository.deleteById(id);
+        return id;
+    }
     
 
 }

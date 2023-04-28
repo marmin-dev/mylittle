@@ -13,6 +13,7 @@ public class QuestionRequestDto {
 
     public String question;
 
+
     public Question toQEntity(){
         // dto To entity
         return Question.builder()
