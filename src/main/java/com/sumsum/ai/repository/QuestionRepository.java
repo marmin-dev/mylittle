@@ -14,6 +14,6 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
 
     List<Question> findByAuthor(String author, Sort sort);
 
-    @Query(value = "SELECT * FROM question WHERE author = :author and char_mo = :character ORDER BY id DESC", nativeQuery = true)
+    @Query(value = "SELECT * FROM question WHERE author = :author and char_mo = :character ORDER BY id DESC LIMIT 8", nativeQuery = true)
     List<Question> findByAuthorAndCharacter(@Param("author") String author, @Param("character") String character);
 }

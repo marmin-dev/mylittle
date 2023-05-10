@@ -11,7 +11,7 @@ import org.springframework.lang.NonNull;
 @Builder
 @ToString
 @Data
-public class Question {
+public class Question extends BaseTimeEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
