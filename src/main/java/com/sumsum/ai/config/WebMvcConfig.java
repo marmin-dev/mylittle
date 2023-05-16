@@ -9,11 +9,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        // 모든 경로에 대해
         long MAX_AGE_SPECS = 3600;
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3000")
-                .allowedMethods("GET","POST","PUT","PATCH","DELETE","OPTIONS")
+                .allowedOrigins("http://localhost", "https://www.sumsumai.click")
+                .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true)
                 .maxAge(MAX_AGE_SPECS);
