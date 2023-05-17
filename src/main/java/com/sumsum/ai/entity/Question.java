@@ -23,6 +23,7 @@ public class Question {
     @Column(nullable = false)
     private String author;
 
+    @Lob
     @Column(nullable = false)
     private String answer;
 

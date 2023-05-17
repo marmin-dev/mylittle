@@ -58,6 +58,7 @@ public class QuestionService {
         message.put("role", "user");
         message.put("content", question);
 
+
         List<Map<String, Object>> messages = new ArrayList<>();
         messages.add(message);
 
