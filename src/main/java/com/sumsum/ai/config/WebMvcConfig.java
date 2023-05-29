@@ -11,7 +11,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         long MAX_AGE_SPECS = 3600;
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost", "https://www.sumsumai.click")
+                .allowedOrigins("http://localhost", "https://www.sumsumai.click", "http://localhost:3000")
                 .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true)
